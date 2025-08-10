@@ -16,6 +16,7 @@ import { ThemedView } from '@/components/ThemedView';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { Ionicons } from '@expo/vector-icons';
+import Svg, { Defs, RadialGradient, Stop, Circle } from 'react-native-svg';
 
 const placeholderSongs = [
     {id: '1', title: 'CLAIRO VIBES', image: require('@/assets/images/CLAIRO-VIBES.png')},
@@ -24,6 +25,37 @@ const placeholderSongs = [
 ];
 
 
+function BackgroundGlow() {
+    return (
+        <Svg height="100%" width="100%" style={StyleSheet.absoluteFill}>
+        <Defs>
+          {/* Pink Glow */}
+          <RadialGradient id="grad1" cx="50%" cy="50%" r="50%">
+            <Stop offset="0%" stopColor="#BD7CBE" stopOpacity="0.3" />
+            <Stop offset="100%" stopColor="#121212" stopOpacity="1" />
+          </RadialGradient>
+  
+          {/* Blue Glow */}
+          <RadialGradient id="grad2" cx="50%" cy="50%" r="50%">
+            <Stop offset="0%" stopColor="#5B60F6" stopOpacity="0.4" />
+            <Stop offset="100%" stopColor="#121212" stopOpacity="0" />
+          </RadialGradient>
+  
+          {/* Yellow Glow */}
+          <RadialGradient id="grad3" cx="50%" cy="50%" r="50%">
+            <Stop offset="0%" stopColor="#BBBE7C" stopOpacity="0.4" />
+            <Stop offset="100%" stopColor="#121212" stopOpacity="0" />
+          </RadialGradient>
+        </Defs>
+  
+        <Circle cx="20%" cy="15%" r="40%" fill="url(#grad1)" />
+        <Circle cx="100%" cy="70%" r="50%" fill="url(#grad2)" />
+        <Circle cx="20%" cy="100%" r="80%" fill="url(#grad3)" />
+      </Svg>
+    );
+  }
+
+// section component for section title + horizontal song list
 const Section = ({ title, data }) => {
     const listRef = useRef(null);
 
@@ -67,19 +99,22 @@ const Section = ({ title, data }) => {
 export default function HomePage() {
 
     return (
-        <ScrollView style={[styles.container, { backgroundColor: '#121212' }]}>
-            {/* Perfect For You */}
-            <Section title="Perfect for You" data={placeholderSongs}/> 
+        <View style={{ flex: 1, backgroundColor: '#121212' }}>
+            <BackgroundGlow />
+            <ScrollView style={styles.container}>
+                {/* Perfect For You */}
+                <Section title="Perfect for You" data={placeholderSongs}/> 
 
-            {/* Try Something New */}
-            <Section title="Try Something New" data={placeholderSongs} />
+                {/* Try Something New */}
+                <Section title="Try Something New" data={placeholderSongs} />
 
-            {/* Recently Played */}
-            <Section title="Recently Played" data={placeholderSongs} />
+                {/* Recently Played */}
+                <Section title="Recently Played" data={placeholderSongs} />
 
-            {/* Popular with Friends */}
-            <Section title="Popular with Friends" data={placeholderSongs} />
-        </ScrollView>
+                {/* Popular with Friends */}
+                <Section title="Popular with Friends" data={placeholderSongs} />
+            </ScrollView>
+        </View>
     );
 }
 
@@ -109,9 +144,9 @@ const styles = StyleSheet.create({
         padding: 6,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
+        shadowOpacity: 0.4,
+        shadowRadius: 6,
+        elevation: 8,
       },
       card: {
         marginHorizontal: 10,
