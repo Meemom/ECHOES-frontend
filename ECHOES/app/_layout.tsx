@@ -11,11 +11,12 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     InterBold: require('../assets/fonts/Inter_24pt-Bold.ttf'),
-    InterRegular: require('../assets/fonts/Inter_24pt-Bold.ttf'),
+    InterRegular: require('../assets/fonts/Inter_24pt-Regular.ttf'),
     InterBoldItalic: require('../assets/fonts/Inter_24pt-BoldItalic.ttf'),
     InterExtraBold: require('../assets/fonts/Inter_24pt-ExtraBold.ttf'),
     InterLight: require('../assets/fonts/Inter_24pt-ExtraLight.ttf'),
     InterThin: require('../assets/fonts/Inter_24pt-Thin.ttf'),
+    InterMedium: require('../assets/fonts/Inter_24pt-Medium.ttf'),
   });
 
   if (!loaded) {
