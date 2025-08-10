@@ -1,7 +1,7 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import { HapticTab } from '@/components/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
@@ -35,11 +35,19 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="WelcomePage"
+        options={{
+          title: 'Welcome',
+          tabBarIcon: ({ color }) => <MaterialIcons name="Music Note" size={24} color={color} />,
+          tabBarLabelStyle: { fontFamily: 'InterRegular' },
+        }}
+      />
+      <Tabs.Screen
         name="HomePage"
         options={{
           title: 'Echoes',
-          tabBarIcon: ({ color }) => <Icon name="home" size={24} color={color} />,
-          tabBarLabelStyle: { fontFamily: 'InknutAntiquaSemiBold' },
+          tabBarIcon: ({ color }) => <MaterialIcons name="home" size={24} color={color} />,
+          tabBarLabelStyle: { fontFamily: 'InterRegular' },
         }}
       />
     </Tabs>
