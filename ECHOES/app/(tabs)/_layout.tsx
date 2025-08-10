@@ -1,7 +1,7 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import { HapticTab } from '@/components/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
@@ -38,7 +38,7 @@ export default function TabLayout() {
         name="WelcomePage"
         options={{
           title: 'Welcome',
-          tabBarIcon: ({ color }) => <MaterialIcons name="Music Note" size={24} color={color} />,
+          tabBarIcon: ({ color }) => <MaterialIcons name="music-note" size={24} color={color} />,
           tabBarLabelStyle: { fontFamily: 'InterRegular' },
         }}
       />
@@ -50,6 +50,14 @@ export default function TabLayout() {
           tabBarLabelStyle: { fontFamily: 'InterRegular' },
         }}
       />
-    </Tabs>
+    <Tabs.Screen
+    name="UserProfile"
+    options={{
+      title: 'Profile',
+      tabBarIcon: ({ color }) => <MaterialIcons name="account-circle" size={24} color={color} />,
+      tabBarLabelStyle: { fontFamily: 'InterRegular' },
+    }}
+  />
+  </Tabs>
   );
 }
