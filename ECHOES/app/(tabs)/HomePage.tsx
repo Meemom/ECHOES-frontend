@@ -24,7 +24,7 @@ const placeholderSongs = [
     {id: '3', title: 'Gym 🔥', image: require('@/assets/images/GYM.png')},
 ];
 
-
+// TO DO: figure out how to change circle positions every time the page loads
 function BackgroundGlow() {
     return (
         <Svg height="100%" width="100%" style={StyleSheet.absoluteFill}>
@@ -48,7 +48,7 @@ function BackgroundGlow() {
           </RadialGradient>
         </Defs>
   
-        <Circle cx="20%" cy="15%" r="40%" fill="url(#grad1)" />
+        <Circle cx="20%" cy="10%" r="50%" fill="url(#grad1)" />
         <Circle cx="100%" cy="70%" r="50%" fill="url(#grad2)" />
         <Circle cx="20%" cy="100%" r="80%" fill="url(#grad3)" />
       </Svg>
