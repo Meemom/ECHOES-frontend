@@ -74,6 +74,18 @@ export function BackgroundGlow( { colors = ['#BD7CBE', '#5B60F6', '#BBBE7C']}) {
     );
   }
 
+function ColorChangingText({ text, style }) {
+    const [clicked, setClicked] = useState(false);
+  
+    return (
+      <TouchableOpacity onPress={() => setClicked(!clicked)}>
+        <ThemedText style={[styles.headerTitle, clicked && styles.clickedTitle]}>
+          {text}
+        </ThemedText>
+      </TouchableOpacity>
+    );
+}
+
 // section component for section title + horizontal song list
 const Section = ({ title, data }) => {
     const listRef = useRef(null);
@@ -91,7 +103,7 @@ const Section = ({ title, data }) => {
         <View style={styles.section}>
         {/* Section Header with Arrow */}
         <View style={styles.header}>
-          <ThemedText style={styles.headerTitle}>{title}</ThemedText>
+          <ColorChangingText style={styles.headerTitle} text={title} />
           <TouchableOpacity style={styles.arrowButton} onPress={handleNext}>
             <Ionicons name="arrow-forward" size={20} color="white" />
           </TouchableOpacity>
@@ -162,6 +174,11 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: 'white',
+      },
+      clickedTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#FF9EDF',
       },
       arrowButton: {
         backgroundColor: '#5B60F6',

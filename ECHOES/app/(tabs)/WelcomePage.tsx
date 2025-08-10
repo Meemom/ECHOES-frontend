@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
   StyleSheet,
@@ -23,6 +23,25 @@ export default function WelcomePage() {
 
     };
 
+    // generate random meme
+    const memes = [
+        require('@/assets/images/barbie.jpeg'),
+        require('@/assets/images/chandler.jpg'),
+        require('@/assets/images/clairo.jpg'),
+        require('@/assets/images/matrix.jpg')
+    ];
+
+    const [randomImage, setRandomImage] = useState(null);
+
+    useEffect(() => {
+        const randomIndex = Math.floor(Math.random() * memes.length);
+        setRandomImage(memes[randomIndex]);
+      }, []);
+
+    if (!randomImage) {
+        return null;
+    }
+
     return (
         <LinearGradient
         colors={['#121212', '#3B3B9C']}
@@ -33,7 +52,7 @@ export default function WelcomePage() {
         <View>
             <ScrollView>
                 <View style={{ flex: 1, alignItems: 'center', paddingTop: 60 }}>
-                    <Image source={require('@/assets/images/chandler.jpg')} style={styles.memeImage} />
+                    <Image source={randomImage} style={styles.memeImage} />
                     <View style={{ width: 350, alignItems: 'center' }}>
                         <ThemedText style={styles.headerTitle}>Today's Vibe</ThemedText>
                         <TouchableOpacity style={styles.button} onPress={onClick}>
@@ -56,8 +75,8 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     memeImage: {
-        width: 350,
-        height: 350,
+        width: 300,
+        height: 300,
         borderRadius: 20, 
         marginTop: 40,
         marginBottom: 10, 
@@ -70,6 +89,7 @@ const styles = StyleSheet.create({
         fontFamily: 'InterBold',
         marginTop: 10,
         width: '60%',
+        paddingVertical: 10, 
     },
     buttonText: {
         fontFamily: 'InterBold',
