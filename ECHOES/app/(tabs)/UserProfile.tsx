@@ -16,6 +16,7 @@ import { ThemedView } from '@/components/ThemedView';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { MaterialIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 const USERNAME = 'The Sound of Meowsic';
 const FOLLOWERS = 409;
@@ -33,18 +34,18 @@ const popularPlaylists = [
 
 export default function UserProfile() {
 
-    const showPlaylist = ( {data} ) => {
+    function ShowPlaylist( {data} ) {
         return (
             <TouchableOpacity style={styles.playlistFrame}>
                 <Image source={data.image} style={styles.playlistImage}/>
-                <ThemedText>{data.name}</ThemedText>
+                <ThemedText style={styles.playlistTitle}>{data.name}</ThemedText>
                 <View style={ { flexDirection: 'row' }}>
-                    <ThemedText>{data.duration}</ThemedText>
-                    <ThemedText>{data.likes}</ThemedText>
+                    <ThemedText style={styles.playlistDescription}>{data.duration}</ThemedText>
+                    <ThemedText style={styles.playlistDescription}>{data.likes}</ThemedText>
                 </View>
             </TouchableOpacity>
         );
-    }; 
+    }
 
     return (
         <ScrollView style={styles.container}>
@@ -97,8 +98,23 @@ export default function UserProfile() {
             </View>
 
             {/* Popular Playlists */}
-            <View style={styles.header}>
-                <ThemedText>Popular Playlists</ThemedText>
+            <View>
+                <View style={styles.header}>
+                    <ThemedText style={styles.headerTitle}>Popular Playlists</ThemedText>
+                    <TouchableOpacity style={styles.arrowButton}>
+                        <Ionicons name="arrow-forward" size={20} color="white" />
+                    </TouchableOpacity>
+                </View>
+                <View style={{ marginBottom: 20, marginLeft: 15 }}>
+                    <FlatList 
+                    data={popularPlaylists}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => <ShowPlaylist data={item} />}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    ItemSeparatorComponent={() => <View style={{ width: 12 }} />}
+                    />
+                </View>
             </View>
         </ScrollView>
     );
@@ -166,8 +182,8 @@ const styles = StyleSheet.create({
     },
     playlistImage: {
         borderRadius: 20,
-        width: 120,
-        height: 153,
+        width: 113,
+        height: 113,
     },
     playlistTitle: {
         color: 'white',
@@ -179,4 +195,14 @@ const styles = StyleSheet.create({
         fontFamily: 'InterMedium',
         fontSize: 8,
     },
+    arrowButton: {
+        backgroundColor: '#5B60F6',
+        borderRadius: 20,
+        padding: 6,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.4,
+        shadowRadius: 6,
+        elevation: 8,
+      },
 });
