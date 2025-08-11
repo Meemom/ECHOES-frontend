@@ -5,6 +5,7 @@ export const userConcerts = [
         venue: 'Rogers Centre',
         date: '2025-08-17',
         rating: null,
+        image: require('@/assets/images/kaytranada.jpeg'),
     },
     {
         id: '2',
@@ -12,6 +13,7 @@ export const userConcerts = [
         venue: 'Rogers Stadium',
         date: '2025-07-24',
         rating: 3,
+        image: require('@/assets/images/cagetheelephant.jpeg'),
     },
     {
         id: '3',
@@ -19,6 +21,7 @@ export const userConcerts = [
         venue: 'Red Hat Amphitheatre',
         date: '2025-02-19',
         rating: 5,
+        image: require('@/assets/images/themarias.jpeg'),
     },
     {
         id: '4',
@@ -26,6 +29,7 @@ export const userConcerts = [
         venue: 'Rogers Centre',
         date: '2025-12-13',
         rating: 3,
+        image: require('@/assets/images/kali.jpeg'),
     },
     {
         id: '5',
@@ -33,5 +37,6 @@ export const userConcerts = [
         venue: 'Greek Theatre',
         date: '2024-11-24',
         rating: 5,
+        image: require('@/assets/images/menitrust.jpeg'),
     },
 ];

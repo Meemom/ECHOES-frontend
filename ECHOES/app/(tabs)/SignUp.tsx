@@ -35,8 +35,8 @@ export default function SignUp() {
         </Defs>
         <Circle
         cx={width / 2}
-        cy={height / 2.5}
-        r={width / 1.5} 
+        cy={height / 3}
+        r={width / 1.4} 
         fill="url(#grad1)"
         />
     </Svg>
