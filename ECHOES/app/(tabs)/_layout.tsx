@@ -35,6 +35,14 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+      name="SignUp"
+      options={{
+        title: 'Sign Up',
+        tabBarIcon: ({ color }) => <MaterialIcons name="login" size={24} color={color} />,
+        tabBarLabelStyle: { fontFamily: 'InterRegular' },
+      }}
+    />
+      <Tabs.Screen
         name="WelcomePage"
         options={{
           title: 'Welcome',
@@ -50,14 +58,14 @@ export default function TabLayout() {
           tabBarLabelStyle: { fontFamily: 'InterRegular' },
         }}
       />
-    <Tabs.Screen
-    name="UserProfile"
-    options={{
-      title: 'Profile',
-      tabBarIcon: ({ color }) => <MaterialIcons name="account-circle" size={24} color={color} />,
-      tabBarLabelStyle: { fontFamily: 'InterRegular' },
-    }}
-  />
+      <Tabs.Screen
+      name="UserProfile"
+      options={{
+        title: 'Profile',
+        tabBarIcon: ({ color }) => <MaterialIcons name="account-circle" size={24} color={color} />,
+        tabBarLabelStyle: { fontFamily: 'InterRegular' },
+      }}
+    />
   </Tabs>
   );
 }
