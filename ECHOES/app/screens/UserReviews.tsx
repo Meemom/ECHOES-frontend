@@ -73,15 +73,58 @@ const reviews = [
 
 export default function UserReviews() {
 
+    const [selectedTab, setSelectedTab] = useState('You');
+
     function ReviewCard({ data }) {
         return (
-            <View style={styles.reviewCard}>
-                <ThemedText>{data.source === 'user'? 'You' : data.username} reviewed {data.title}</ThemedText>
+                <TouchableOpacity style={styles.reviewCard}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <View>
+                        <ThemedText style={{ fontFamily: 'InterLight' }}>
+                            {data.source === 'user' ? 'You' : data.username} reviewed
+                        </ThemedText>
+                        <ThemedText style={styles.reviewTitle}>{data.title}</ThemedText>
+                        <ThemedText style={styles.reviewYear}>{data.year}</ThemedText>
+                        </View>
+                        <ThemedText style={styles.reviewDate}>{data.reviewDate}</ThemedText>
+                    </View>
 
-            </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Image source={data.image} style={styles.reviewImage} />
+                        <ThemedText style={styles.reviewText} numberOfLines={3}>
+                        {data.review}
+                        </ThemedText>
+                    </View>
+                </TouchableOpacity>
         );
     }
 
+    return (
+    <ScrollView>
+
+        {/* Friends and Following Toggle */}
+        <View style={styles.toggleContainer}>
+        {['Friends', 'Followers'].map(tab => (
+        <TouchableOpacity
+            key={tab}
+            style={[
+                styles.toggleButton,
+                selectedTab === tab && styles.activeToggle,
+            ]}
+            onPress={() => setSelectedTab(tab)}>
+            <ThemedText
+                style={[
+                    styles.toggleText,
+                    selectedTab === tab && styles.activeToggleText,
+                ]}>
+                {tab}
+            </ThemedText>
+        </TouchableOpacity>
+        ))}
+        </View>
+
+    </ScrollView>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -90,12 +133,48 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     reviewText: {
-
+        fontFamily: 'InterLight',
+        fontSize: 13,
+        alignSelf: 'flex-start',
+        color: 'white',
     },
     reviewTitle: {
-
+        fontFamily: 'InterRegular',
+        fontSize: 16,
+        color: 'white',
+    },
+    reviewYear: {
+        fontFamily: 'InterMedium',
+        fontSize: 15,
+        opacity: 0.4,
+        color: 'white',
     },
     reviewDate: {
-
+        fontFamily: 'InterExtraLight',
+        fontSize: 15,
+        color: 'white',
     },
+    reviewImage: {
+        width: 78,
+        height: 78,
+    },
+    toggleContainer: {
+        flexDirection: 'row',
+        backgroundColor: '#5B60F6',
+        borderRadius: 20,
+        padding: 4,
+        marginTop: 12,
+        alignSelf: 'flex-start',
+        width: '100%',
+    },
+    toggleButton: {
+        paddingVertical: 6,
+        paddingHorizontal: 20,
+        borderRadius: 20,
+    },
+    activeToggle: {
+        backgroundColor: 'white',
+    },
+    toggleText: { color: 'white', fontFamily: 'InterRegular' },
+    activeToggleText: { color: 'black' },
 });
