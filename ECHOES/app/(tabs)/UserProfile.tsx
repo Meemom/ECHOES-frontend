@@ -78,7 +78,10 @@ export default function UserProfile() {
 
             {/* Dashboard */}
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 12, paddingHorizontal: 20}}>
-                <TouchableOpacity style={styles.dashboardTile}>
+                <TouchableOpacity 
+                style={styles.dashboardTile}
+                onPress={() => router.push('/screens/UserProfileScreens/UserConcerts')}
+                >
                     <ThemedText style={styles.dashboardText}>{userInfo.concerts} Concerts</ThemedText>
                 </TouchableOpacity>
                 <TouchableOpacity 
