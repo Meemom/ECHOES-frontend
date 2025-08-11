@@ -12,11 +12,9 @@ import {
   FlatList
 } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import { useThemeColor } from '@/hooks/useThemeColor';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
 const USERNAME = 'The Sound of Meowsic';
 const FOLLOWERS = 409;
@@ -34,6 +32,8 @@ const popularPlaylists = [
 ];
 
 export default function UserProfile() {
+
+    const router = useRouter();
 
     // popular playlists design 
     function ShowPlaylist( {data} ) {
@@ -95,8 +95,11 @@ export default function UserProfile() {
                 <TouchableOpacity style={styles.dashboardTile}>
                     <ThemedText style={styles.dashboardText}>{CONCERTS} Concerts</ThemedText>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.dashboardTile}>
-                    <ThemedText style={styles.dashboardText}>{REVIEWS} Reviews</ThemedText>
+                <TouchableOpacity 
+                style={styles.dashboardTile}
+                onPress={() => router.push('/screens/UserProfileScreens/UserReviews')}
+                >
+                <ThemedText style={styles.dashboardText}>{REVIEWS} Reviews</ThemedText>
                 </TouchableOpacity>
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 12, paddingHorizontal: 20}}>

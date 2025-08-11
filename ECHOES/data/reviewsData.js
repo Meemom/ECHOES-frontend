@@ -7,7 +7,7 @@ export const reviews = [
         type: 'song',
         image: require('@/assets/images/DOPAMINE.png') , 
         year: '2025', 
-        review: "Tecca recalls advice from his mother warning him that people who don’t stay focused or move smart in life 'don’t last.' ", 
+        review: "Lil Tecca has grown significantly – he’s no longer that same dude who made a one-hit wonder “Ransom”", 
         reviewDate: '2025-08-10', 
         rating: 4,
         username: '@The Sound of Meowsic',

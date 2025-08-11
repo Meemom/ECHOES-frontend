@@ -15,7 +15,10 @@ import { ThemedView } from '@/components/ThemedView';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useThemeColor } from '@/hooks/useThemeColor';
 
+const USERNAME = '@The Sound of Meowsic';
+
 export default function UserConcerts() {
+    
 
 }
 
