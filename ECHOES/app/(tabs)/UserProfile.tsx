@@ -34,14 +34,24 @@ const popularPlaylists = [
 
 export default function UserProfile() {
 
+    // popular playlists design 
     function ShowPlaylist( {data} ) {
         return (
             <TouchableOpacity style={styles.playlistFrame}>
                 <Image source={data.image} style={styles.playlistImage}/>
-                <ThemedText style={styles.playlistTitle}>{data.name}</ThemedText>
-                <View style={ { flexDirection: 'row' }}>
+                <ThemedText 
+                style={styles.playlistTitle}
+                numberOfLines={2}
+                ellipsizeMode='tail'
+                >
+                    {data.name}
+                </ThemedText>
+                <View style={styles.playlistRow}>
                     <ThemedText style={styles.playlistDescription}>{data.duration}</ThemedText>
-                    <ThemedText style={styles.playlistDescription}>{data.likes}</ThemedText>
+                    <TouchableOpacity style={styles.playlistLikes}>
+                        <ThemedText style={[styles.playlistDescription, { color: 'black' }]}>{data.likes}</ThemedText>
+                        <MaterialIcons name="favorite-border" size={10} color='black' />
+                    </TouchableOpacity>
                 </View>
             </TouchableOpacity>
         );
@@ -178,7 +188,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#2F2F2F',
         borderRadius: 20, 
         width: 113,
-        height: 170,
+        height: 185,
     },
     playlistImage: {
         borderRadius: 20,
@@ -188,12 +198,37 @@ const styles = StyleSheet.create({
     playlistTitle: {
         color: 'white',
         fontFamily: 'InterBold',
-        fontSize: 10,
+        fontSize: 11,
+        alignSelf: 'center', 
+        width: 100,
+        flexShrink: 1,
+        lineHeight: 15, 
+        marginTop: 5,
+        height: 35, 
+    },
+    playlistRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 10,
+        width: '100%',
     },
     playlistDescription: {
         color: 'white',
         fontFamily: 'InterMedium',
         fontSize: 8,
+    },
+    playlistLikes: {
+        backgroundColor: '#5B60F6',
+        width: 36,
+        height: 14,
+        borderRadius: 30,
+        padding: 6,
+        flexDirection: 'row',      
+        alignItems: 'center',      
+        paddingHorizontal: 6,    
+        paddingVertical: 3, 
+        justifyContent: 'space-around',
     },
     arrowButton: {
         backgroundColor: '#5B60F6',
