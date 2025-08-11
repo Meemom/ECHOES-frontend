@@ -71,8 +71,8 @@ const styles = StyleSheet.create({
   },
   backgroundShape: {
     backgroundColor: '#5B60F6',
-    width: 402,
-    height: 786,
+    width: '100%',
+    height: '75%',
     borderBottomLeftRadius: 50,
     borderBottomRightRadius: 50,
     height: 700,
