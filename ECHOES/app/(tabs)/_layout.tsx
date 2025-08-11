@@ -66,6 +66,14 @@ export default function TabLayout() {
         tabBarLabelStyle: { fontFamily: 'InterRegular' },
       }}
     />
+    <Tabs.Screen
+      name="UserReviews"
+      options={{
+        title: 'Reviews',
+        tabBarIcon: ({ color }) => <MaterialIcons name="rate-review" size={24} color={color} />,
+        tabBarLabelStyle: { fontFamily: 'InterRegular' },
+      }}
+    />
   </Tabs>
   );
 }

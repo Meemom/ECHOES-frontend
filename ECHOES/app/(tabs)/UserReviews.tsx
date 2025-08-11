@@ -80,7 +80,7 @@ export default function UserReviews() {
                 <TouchableOpacity style={styles.reviewCard}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <View>
-                        <ThemedText style={{ fontFamily: 'InterLight' }}>
+                        <ThemedText style={{ fontFamily: 'InterLight', color: 'white' }}>
                             {data.source === 'user' ? 'You' : data.username} reviewed
                         </ThemedText>
                         <ThemedText style={styles.reviewTitle}>{data.title}</ThemedText>
@@ -100,29 +100,46 @@ export default function UserReviews() {
     }
 
     return (
-    <ScrollView>
+    <ScrollView style={{ flex: 1, backgroundColor: '#101010' }}>
 
-        {/* Friends and Following Toggle */}
-        <View style={styles.toggleContainer}>
-        {['Friends', 'Followers'].map(tab => (
-        <TouchableOpacity
-            key={tab}
-            style={[
-                styles.toggleButton,
-                selectedTab === tab && styles.activeToggle,
-            ]}
-            onPress={() => setSelectedTab(tab)}>
-            <ThemedText
-                style={[
-                    styles.toggleText,
-                    selectedTab === tab && styles.activeToggleText,
-                ]}>
-                {tab}
-            </ThemedText>
-        </TouchableOpacity>
-        ))}
+        {/* friends/you/following toggle */}
+        <View style={{ alignItems: 'center', marginVertical: 20 }}>
+            <View style={[styles.toggleContainer, { flexDirection: 'row' }]}>
+                {['Friends', 'You', 'Followers'].map(tab => (
+                <TouchableOpacity
+                    key={tab}
+                    style={[
+                    styles.toggleButton,
+                    selectedTab === tab && styles.activeToggle,
+                    ]}
+                    onPress={() => setSelectedTab(tab)}
+                >
+                    <ThemedText
+                    style={[
+                        styles.toggleText,
+                        selectedTab === tab && styles.activeToggleText,
+                    ]}
+                    >
+                    {tab}
+                    </ThemedText>
+                </TouchableOpacity>
+                ))}
+            </View>
         </View>
 
+        <View>
+    {reviews
+        .filter(review => {
+            if (selectedTab === 'You') return review.source === 'user';
+            if (selectedTab === 'Friends') return review.source === 'friend';
+            if (selectedTab === 'Followers') return review.source === 'following';
+            return true;
+        })
+        .map((review, index) => (
+            <ReviewCard key={index} data={review} />
+        ))
+    }
+</View>
     </ScrollView>
     );
 }
@@ -159,22 +176,23 @@ const styles = StyleSheet.create({
         height: 78,
     },
     toggleContainer: {
-        flexDirection: 'row',
         backgroundColor: '#5B60F6',
-        borderRadius: 20,
-        padding: 4,
+        borderRadius: 30,
+        padding: 9,
         marginTop: 12,
-        alignSelf: 'flex-start',
-        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     toggleButton: {
-        paddingVertical: 6,
-        paddingHorizontal: 20,
+        paddingHorizontal: 16,
+        paddingVertical: 8,
         borderRadius: 20,
+        marginHorizontal: 4,
     },
     activeToggle: {
         backgroundColor: 'white',
     },
-    toggleText: { color: 'white', fontFamily: 'InterRegular' },
+    toggleText: { color: 'black', fontFamily: 'InterBold', fontSize: 20 },
     activeToggleText: { color: 'black' },
 });
