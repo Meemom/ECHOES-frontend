@@ -75,27 +75,62 @@ export default function UserReviews() {
 
     const [selectedTab, setSelectedTab] = useState('You');
 
+    const getDaysAgo = (reviewDate) => {
+        const today = new Date();
+        const review = new Date(reviewDate);
+
+        const diffMs = today - review;
+
+        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+        if (diffDays === 0) return "Today";
+        if (diffDays === 1) return "1d";
+        if (diffDays < 7) return `${diffDays}d`;
+      
+        const diffWeeks = Math.floor(diffDays / 7);
+        if (diffWeeks === 1) return "1w";
+        return `${diffWeeks}w`;
+    };
+
     function ReviewCard({ data }) {
         return (
-                <TouchableOpacity style={styles.reviewCard}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <View>
-                        <ThemedText style={{ fontFamily: 'InterLight', color: 'white' }}>
-                            {data.source === 'user' ? 'You' : data.username} reviewed
-                        </ThemedText>
-                        <ThemedText style={styles.reviewTitle}>{data.title}</ThemedText>
-                        <ThemedText style={styles.reviewYear}>{data.year}</ThemedText>
-                        </View>
-                        <ThemedText style={styles.reviewDate}>{data.reviewDate}</ThemedText>
-                    </View>
-
-                    <View style={{ flexDirection: 'row' }}>
-                        <Image source={data.image} style={styles.reviewImage} />
-                        <ThemedText style={styles.reviewText} numberOfLines={3}>
-                        {data.review}
-                        </ThemedText>
-                    </View>
-                </TouchableOpacity>
+            <TouchableOpacity style={styles.reviewCard}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <View>
+                <View style={{ flexDirection: 'row' }}> 
+                <ThemedText
+                  style={{
+                    fontFamily: 'InterLight',
+                    color:
+                      data.source === 'friend' || data.source === 'following'
+                        ? '#FF9EDF' 
+                        : 'white', 
+                  }}
+                >
+                  {data.source === 'user' ? 'You' : data.username}
+                </ThemedText>
+                <ThemedText 
+                style={styles.reviewText}
+                numberOfLines={2}
+                ellipsizeMode='tail'>
+                    reviewed
+                </ThemedText>
+                </View>
+                <ThemedText style={styles.reviewTitle}>{data.title}</ThemedText>
+                <ThemedText style={styles.reviewYear}>{data.year}</ThemedText>
+              </View>
+                <ThemedText style={styles.reviewDate}>
+                    {getDaysAgo(data.reviewDate)}
+                </ThemedText>
+            </View>
+          
+            <View style={{ flexDirection: 'row' }}>
+              <Image source={data.image} style={styles.reviewImage} />
+              <ThemedText style={styles.reviewText} numberOfLines={3}>
+                {data.review}
+              </ThemedText>
+            </View>
+          </TouchableOpacity>          
         );
     }
 
@@ -148,6 +183,8 @@ const styles = StyleSheet.create({
     reviewCard: {
         backgroundColor: '#222222',
         flex: 1,
+        marginBottom: 3,
+        padding: 9, 
     },
     reviewText: {
         fontFamily: 'InterLight',
@@ -158,7 +195,7 @@ const styles = StyleSheet.create({
     reviewTitle: {
         fontFamily: 'InterRegular',
         fontSize: 16,
-        color: 'white',
+        color: 'white'
     },
     reviewYear: {
         fontFamily: 'InterMedium',
@@ -174,6 +211,7 @@ const styles = StyleSheet.create({
     reviewImage: {
         width: 78,
         height: 78,
+        marginRight: 10, 
     },
     toggleContainer: {
         backgroundColor: '#5B60F6',
