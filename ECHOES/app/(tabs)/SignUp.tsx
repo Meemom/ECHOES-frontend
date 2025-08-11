@@ -6,14 +6,8 @@ import {
   Dimensions,
   TouchableOpacity,
   Image,
-  StatusBar,
-  NativeSyntheticEvent,
-  NativeScrollEvent,
 } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import { useThemeColor } from '@/hooks/useThemeColor';
 import Svg, { Defs, RadialGradient, Stop, Circle } from 'react-native-svg';
 
 const { width, height } = Dimensions.get('window');
