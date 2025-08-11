@@ -141,63 +141,65 @@ export default function UserReviews() {
     }
 
     return (
-    <View style={{ flex: 1 }}>
-        <ScrollView ref={scrollRef} style={{ flex: 1, backgroundColor: '#101010' }}>
-
-            {/* friends/you/following toggle */}
+        <View style={{ flex: 1, position: 'relative' }}>
+          <ScrollView
+            ref={scrollRef}
+            contentContainerStyle={{ flexGrow: 1, paddingBottom: 140 }}
+            style={{ flex: 1, backgroundColor: '#101010' }}
+          >
+            {/* toggle + review list */}
             <View style={{ alignItems: 'center', marginVertical: 20 }}>
-                <View style={[styles.toggleContainer, { flexDirection: 'row' }]}>
-                    {['Friends', 'You', 'Followers'].map(tab => (
-                    <TouchableOpacity
-                        key={tab}
-                        style={[
-                        styles.toggleButton,
-                        selectedTab === tab && styles.activeToggle,
-                        ]}
-                        onPress={() => setSelectedTab(tab)}
+              <View style={[styles.toggleContainer, { flexDirection: 'row' }]}>
+                {['Friends', 'You', 'Followers'].map(tab => (
+                  <TouchableOpacity
+                    key={tab}
+                    style={[
+                      styles.toggleButton,
+                      selectedTab === tab && styles.activeToggle,
+                    ]}
+                    onPress={() => setSelectedTab(tab)}
+                  >
+                    <ThemedText
+                      style={[
+                        styles.toggleText,
+                        selectedTab === tab && styles.activeToggleText,
+                      ]}
                     >
-                        <ThemedText
-                        style={[
-                            styles.toggleText,
-                            selectedTab === tab && styles.activeToggleText,
-                        ]}
-                        >
-                        {tab}
-                        </ThemedText>
-                    </TouchableOpacity>
-                    ))}
-                </View>
+                      {tab}
+                    </ThemedText>
+                  </TouchableOpacity>
+                ))}
+              </View>
             </View>
-
-            {/* review section */}
+      
             <View>
-                {reviews
-                    .filter(review => {
-                        if (selectedTab === 'You') return review.source === 'user';
-                        if (selectedTab === 'Friends') return review.source === 'friend';
-                        if (selectedTab === 'Followers') return review.source === 'following';
-                        return true;
-                    })
-                    .map((review, index) => (
-                        <ReviewCard key={index} data={review} />
-                    ))
-                }
+              {reviews
+                .filter(review => {
+                  if (selectedTab === 'You') return review.source === 'user';
+                  if (selectedTab === 'Friends') return review.source === 'friend';
+                  if (selectedTab === 'Followers') return review.source === 'following';
+                  return true;
+                })
+                .map((review, index) => (
+                  <ReviewCard key={index} data={review} />
+                ))}
             </View>
-        </ScrollView>
-
-        {/* floating arrow */}
-        <TouchableOpacity
-        style={[styles.arrowButton, {
-            position: 'absolute',
-            bottom: 20,
-            alignSelf: 'center',
-        }]}
-        onPress={() => scrollRef.current?.scrollToEnd({ animated: true })}
-        >
-        <MaterialIcons name="arrow-downward" size={20} color="black" />
-        </TouchableOpacity>
-    </View>
-    );
+          </ScrollView>
+      
+          {/* floating arrow */}
+          <TouchableOpacity
+            onPress={() => {
+              console.log('arrow pressed');
+              if (scrollRef.current) {
+                scrollRef.current.scrollToEnd({ animated: true });
+              }
+            }}
+            style={styles.arrowButton}
+          >
+            <MaterialIcons name="arrow-downward" size={20} color="black" />
+          </TouchableOpacity>
+        </View>
+      );      
 }
 
 const styles = StyleSheet.create({
@@ -233,6 +235,8 @@ const styles = StyleSheet.create({
         width: 78,
         height: 78,
         marginRight: 10, 
+        marginTop: 5,
+        marginBottom: 5,
     },
     toggleContainer: {
         backgroundColor: '#5B60F6',
@@ -255,15 +259,17 @@ const styles = StyleSheet.create({
     toggleText: { color: 'black', fontFamily: 'InterMedium', fontSize: 20 },
     activeToggleText: { color: 'black' },
     arrowButton: {
-        color: '#FF9EDF',
-        borderRadius: 20,
-        width: 50,
-        height: 50,
-        padding: 6,
+        position: 'absolute',
+        bottom: 20,
+        alignSelf: 'center',
+        backgroundColor: '#FF9EDF',
+        padding: 10,
+        borderRadius: 24,
+        zIndex: 9999,       
+        elevation: 12,      
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.4,
-        shadowRadius: 6,
-        elevation: 8,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
     }
 });
