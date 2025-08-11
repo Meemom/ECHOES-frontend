@@ -15,21 +15,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-
-const USERNAME = 'The Sound of Meowsic';
-const FOLLOWERS = 409;
-const FOLLOWING = 364; 
-const PROFILE_PIC = require('@/assets/images/catpic.jpg');
-const CONCERTS = 13; 
-const REVIEWS = 987; 
-const GENRES = 108;
-const COUNTRIES = 18; 
-const popularPlaylists = [
-    {id: '1', name: 'Afterschool Madness', image: require('@/assets/images/war.png'), duration: '2 h 58 min', likes: 18},
-    {id: '2', name: 'spiderverse vibez', image: require('@/assets/images/spiderverse.png'), duration: '14 hr 3 min', likes: 109},
-    {id: '3', name: 'the last scene of a romcom', image: require('@/assets/images/romcom.png'), duration: '7 hr 6 min', likes: 22},
-    {id: '4', name: 'bling ring', image: require('@/assets/images/coolgirl.jpg'), duration: '1 hr 2 min', likes: 16}
-];
+import { userInfo, popularPlaylists } from '@/data/userData';
 
 export default function UserProfile() {
 
@@ -62,14 +48,14 @@ export default function UserProfile() {
         <ScrollView style={styles.container}>
             {/* Profile header */}
             <View style={styles.section}>
-                <Image source={PROFILE_PIC} style={styles.profilePicture}/>
+                <Image source={userInfo.profilePic} style={styles.profilePicture}/>
                 <TouchableOpacity style={styles.editButton}>
                     <View style={{ alignSelf: 'center' }}>
                         <MaterialIcons name="edit" size={24} color='black' /> 
                     </View>
                 </TouchableOpacity>
                 <View style={{ alignSelf: 'center', marginTop: 10}}>
-                    <ThemedText style={styles.headerTitle}>@{USERNAME}</ThemedText>
+                    <ThemedText style={styles.headerTitle}>@{userInfo.username}</ThemedText>
                 </View>
             </View>
             
@@ -81,11 +67,11 @@ export default function UserProfile() {
                     width: '100%',
                     }}>
                 <View style={{ alignItems: 'center', flex: 1 }}>
-                    <ThemedText style={[styles.followText, { fontFamily: 'InterBold'}]}>{FOLLOWERS}</ThemedText>
+                    <ThemedText style={[styles.followText, { fontFamily: 'InterBold'}]}>{userInfo.followers}</ThemedText>
                     <ThemedText style={[styles.followText, { fontFamily: 'InterRegular'}]}>Followers</ThemedText>
                 </View>
                 <View style={{ alignItems: 'center', flex: 1 }}>
-                    <ThemedText style={[styles.followText, { fontFamily: 'InterBold'}]}>{FOLLOWING}</ThemedText>
+                    <ThemedText style={[styles.followText, { fontFamily: 'InterBold'}]}>{userInfo.following}</ThemedText>
                     <ThemedText style={[styles.followText, { fontFamily: 'InterRegular'}]}>Following</ThemedText>
                 </View>
             </View>
@@ -93,21 +79,21 @@ export default function UserProfile() {
             {/* Dashboard */}
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 12, paddingHorizontal: 20}}>
                 <TouchableOpacity style={styles.dashboardTile}>
-                    <ThemedText style={styles.dashboardText}>{CONCERTS} Concerts</ThemedText>
+                    <ThemedText style={styles.dashboardText}>{userInfo.concerts} Concerts</ThemedText>
                 </TouchableOpacity>
                 <TouchableOpacity 
                 style={styles.dashboardTile}
                 onPress={() => router.push('/screens/UserProfileScreens/UserReviews')}
                 >
-                <ThemedText style={styles.dashboardText}>{REVIEWS} Reviews</ThemedText>
+                <ThemedText style={styles.dashboardText}>{userInfo.reviews} Reviews</ThemedText>
                 </TouchableOpacity>
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 12, paddingHorizontal: 20}}>
                 <TouchableOpacity style={styles.dashboardTile}>
-                    <ThemedText style={styles.dashboardText}>{GENRES} Genres</ThemedText>
+                    <ThemedText style={styles.dashboardText}>{userInfo.genres} Genres</ThemedText>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.dashboardTile}>
-                    <ThemedText style={styles.dashboardText}>{COUNTRIES} Countries</ThemedText>
+                    <ThemedText style={styles.dashboardText}>{userInfo.countries} Countries</ThemedText>
                 </TouchableOpacity>
             </View>
 
