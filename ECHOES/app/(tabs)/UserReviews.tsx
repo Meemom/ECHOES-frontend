@@ -14,6 +14,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useThemeColor } from '@/hooks/useThemeColor';
+import { MaterialIcons } from '@expo/vector-icons';
 
 // fake reviews
 const reviews = [
@@ -75,6 +76,8 @@ export default function UserReviews() {
 
     const [selectedTab, setSelectedTab] = useState('You');
 
+    const scrollRef = useRef(null);
+
     const getDaysAgo = (reviewDate) => {
         const today = new Date();
         const review = new Date(reviewDate);
@@ -98,23 +101,24 @@ export default function UserReviews() {
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
               <View>
                 <View style={{ flexDirection: 'row' }}> 
-                <ThemedText
-                  style={{
-                    fontFamily: 'InterLight',
-                    color:
-                      data.source === 'friend' || data.source === 'following'
-                        ? '#FF9EDF' 
-                        : 'white', 
-                  }}
-                >
-                  {data.source === 'user' ? 'You' : data.username}
-                </ThemedText>
-                <ThemedText 
-                style={styles.reviewText}
-                numberOfLines={2}
-                ellipsizeMode='tail'>
-                    reviewed
-                </ThemedText>
+                    <ThemedText
+                    style={{
+                        fontFamily: 'InterLight',
+                        marginRight: 4,
+                        color:
+                        data.source === 'friend' || data.source === 'following'
+                            ? '#FF9EDF' 
+                            : 'white', 
+                    }}
+                    >
+                    {data.source === 'user' ? 'You' : data.username}
+                    </ThemedText>
+                    <ThemedText 
+                    style={[styles.reviewText, { fontSize: 16 }]}
+                    numberOfLines={2}
+                    ellipsizeMode='tail'>
+                        reviewed
+                    </ThemedText>
                 </View>
                 <ThemedText style={styles.reviewTitle}>{data.title}</ThemedText>
                 <ThemedText style={styles.reviewYear}>{data.year}</ThemedText>
@@ -125,57 +129,74 @@ export default function UserReviews() {
             </View>
           
             <View style={{ flexDirection: 'row' }}>
-              <Image source={data.image} style={styles.reviewImage} />
-              <ThemedText style={styles.reviewText} numberOfLines={3}>
-                {data.review}
-              </ThemedText>
+                <Image source={data.image} style={styles.reviewImage} />
+                <ThemedText style={styles.reviewText}>
+                    {data.review.length > 150
+                    ? data.review.substring(0, 150) + '…'
+                    : data.review}
+                </ThemedText>
             </View>
           </TouchableOpacity>          
         );
     }
 
     return (
-    <ScrollView style={{ flex: 1, backgroundColor: '#101010' }}>
+    <View style={{ flex: 1 }}>
+        <ScrollView ref={scrollRef} style={{ flex: 1, backgroundColor: '#101010' }}>
 
-        {/* friends/you/following toggle */}
-        <View style={{ alignItems: 'center', marginVertical: 20 }}>
-            <View style={[styles.toggleContainer, { flexDirection: 'row' }]}>
-                {['Friends', 'You', 'Followers'].map(tab => (
-                <TouchableOpacity
-                    key={tab}
-                    style={[
-                    styles.toggleButton,
-                    selectedTab === tab && styles.activeToggle,
-                    ]}
-                    onPress={() => setSelectedTab(tab)}
-                >
-                    <ThemedText
-                    style={[
-                        styles.toggleText,
-                        selectedTab === tab && styles.activeToggleText,
-                    ]}
+            {/* friends/you/following toggle */}
+            <View style={{ alignItems: 'center', marginVertical: 20 }}>
+                <View style={[styles.toggleContainer, { flexDirection: 'row' }]}>
+                    {['Friends', 'You', 'Followers'].map(tab => (
+                    <TouchableOpacity
+                        key={tab}
+                        style={[
+                        styles.toggleButton,
+                        selectedTab === tab && styles.activeToggle,
+                        ]}
+                        onPress={() => setSelectedTab(tab)}
                     >
-                    {tab}
-                    </ThemedText>
-                </TouchableOpacity>
-                ))}
+                        <ThemedText
+                        style={[
+                            styles.toggleText,
+                            selectedTab === tab && styles.activeToggleText,
+                        ]}
+                        >
+                        {tab}
+                        </ThemedText>
+                    </TouchableOpacity>
+                    ))}
+                </View>
             </View>
-        </View>
 
-        <View>
-    {reviews
-        .filter(review => {
-            if (selectedTab === 'You') return review.source === 'user';
-            if (selectedTab === 'Friends') return review.source === 'friend';
-            if (selectedTab === 'Followers') return review.source === 'following';
-            return true;
-        })
-        .map((review, index) => (
-            <ReviewCard key={index} data={review} />
-        ))
-    }
-</View>
-    </ScrollView>
+            {/* review section */}
+            <View>
+                {reviews
+                    .filter(review => {
+                        if (selectedTab === 'You') return review.source === 'user';
+                        if (selectedTab === 'Friends') return review.source === 'friend';
+                        if (selectedTab === 'Followers') return review.source === 'following';
+                        return true;
+                    })
+                    .map((review, index) => (
+                        <ReviewCard key={index} data={review} />
+                    ))
+                }
+            </View>
+        </ScrollView>
+
+        {/* floating arrow */}
+        <TouchableOpacity
+        style={[styles.arrowButton, {
+            position: 'absolute',
+            bottom: 20,
+            alignSelf: 'center',
+        }]}
+        onPress={() => scrollRef.current?.scrollToEnd({ animated: true })}
+        >
+        <MaterialIcons name="arrow-downward" size={20} color="black" />
+        </TouchableOpacity>
+    </View>
     );
 }
 
@@ -216,7 +237,7 @@ const styles = StyleSheet.create({
     toggleContainer: {
         backgroundColor: '#5B60F6',
         borderRadius: 30,
-        padding: 9,
+        padding: 4,
         marginTop: 12,
         flexDirection: 'row',
         justifyContent: 'center',
@@ -231,6 +252,18 @@ const styles = StyleSheet.create({
     activeToggle: {
         backgroundColor: 'white',
     },
-    toggleText: { color: 'black', fontFamily: 'InterBold', fontSize: 20 },
+    toggleText: { color: 'black', fontFamily: 'InterMedium', fontSize: 20 },
     activeToggleText: { color: 'black' },
+    arrowButton: {
+        color: '#FF9EDF',
+        borderRadius: 20,
+        width: 50,
+        height: 50,
+        padding: 6,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.4,
+        shadowRadius: 6,
+        elevation: 8,
+    }
 });
