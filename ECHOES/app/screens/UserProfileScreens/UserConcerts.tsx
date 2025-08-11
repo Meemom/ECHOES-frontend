@@ -20,34 +20,45 @@ import { userInfo, popularPlaylists } from '@/data/userData';
 export default function UserConcerts() {
   const scrollRef = useRef(null);
 
+  // concert card 
+  function concertCard({ data }) {
+
+  }
+
   return (
-    <View style={{ flex: 1, position: 'relative' }}> 
-    <ScrollView 
-    ref={scrollRef}
-    contentContainerStyle={{ flexGrow: 1, backgroundColor:'#101010', paddingBottom: 200 }}>
-      <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'left', flexWrap: 'wrap', padding: 20 }}>
-          <ThemedText style={styles.headerTitle}>
+      <View style={{ flex: 1, backgroundColor: '#101010', position: 'relative' }}>
+      <View
+        style={[
+          styles.backgroundShape,
+          {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: -1,
+          }
+        ]}
+      />
+      <ScrollView contentContainerStyle={{ flexGrow: 1, padding: 20 }}>
+        <ThemedText style={styles.headerTitle}>
           @{userInfo.username} has been to{' '}
           <ThemedText style={[styles.headerTitle, { color: '#FF9EDF' }]}>{userInfo.concerts}</ThemedText>{' '}
           Concerts
         </ThemedText>
-      </View>
-
-
-    </ScrollView>
-    {/* floating arrow */}
-    <TouchableOpacity
-            onPress={() => {
-              console.log('arrow pressed');
-              if (scrollRef.current) {
-                scrollRef.current.scrollToEnd({ animated: true });
-              }
-            }}
-            style={styles.arrowButton}
-          >
-            <MaterialIcons name="arrow-downward" size={20} color="black" />
+        {/* floating arrow */}
+        <TouchableOpacity
+                onPress={() => {
+                  console.log('arrow pressed');
+                  if (scrollRef.current) {
+                    scrollRef.current.scrollToEnd({ animated: true });
+                  }
+                }}
+                style={styles.arrowButton}
+              >
+                <MaterialIcons name="arrow-downward" size={20} color="black" />
           </TouchableOpacity>
-    </View> 
+      </ScrollView>
+    </View>
   );
 }
 
@@ -58,9 +69,17 @@ const styles = StyleSheet.create({
     color: 'white',
     lineHeight: 30,
   },
+  backgroundShape: {
+    backgroundColor: '#5B60F6',
+    width: 402,
+    height: 786,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
+    height: 700,
+  },
   arrowButton: {
     position: 'absolute',
-    bottom: 20,
+    bottom: 50,
     alignSelf: 'center',
     backgroundColor: '#FF9EDF',
     padding: 10,
@@ -68,8 +87,8 @@ const styles = StyleSheet.create({
     zIndex: 9999,       
     elevation: 12,      
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 0.2,
-    shadowRadius: 4,
+    shadowRadius: 10,
 },
 });
