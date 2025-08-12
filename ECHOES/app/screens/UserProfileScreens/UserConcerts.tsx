@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
 },
 concertCard: {
   backgroundColor: 'white',
-  width: '90%',
+  width: '100%',
   height: 100,
   borderRadius: 30,
 },
@@ -164,11 +164,15 @@ concertText: {
   color: 'black',
   fontFamily: 'InterBold',
   fontSize: 16,
+  margin: 5,
+  lineHeight: 17,
+  includeFontPadding: false, 
+  textAlignVertical: 'center',
 },
 concertDateText: {
   color: '#5B60F6',
   fontFamily: 'InterBold',
-  fontSize: 16, 
+  fontSize: 12, 
 },
 concertImage: {
   width: 80,

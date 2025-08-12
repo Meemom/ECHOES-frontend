@@ -51,7 +51,7 @@ export default function WelcomePage() {
         >
         <View>
             <ScrollView>
-                <View style={{ flex: 1, alignItems: 'center', paddingTop: 60 }}>
+                <View style={{ flex: 1, alignItems: 'center', paddingTop: 150 }}>
                     <Image source={randomImage} style={styles.memeImage} />
                     <View style={{ width: 350, alignItems: 'center' }}>
                         <ThemedText style={styles.headerTitle}>Today's Vibe</ThemedText>
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         height: 300,
         borderRadius: 20, 
         marginTop: 40,
-        marginBottom: 10, 
+        marginBottom: 20, 
         alignSelf: 'center',
     },
     button: {
