@@ -17,6 +17,7 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { Ionicons } from '@expo/vector-icons';
 import Svg, { Defs, RadialGradient, Stop, Circle } from 'react-native-svg';
+import { useRouter } from 'expo-router';
 
 //placeholder images
 const PerfectForYou = [
@@ -134,6 +135,8 @@ const Section = ({ title, data }) => {
 }
 
 export default function HomePage() {
+  
+  const router = useRouter();
 
     return (
         <View style={{ flex: 1, backgroundColor: '#121212' }}>
