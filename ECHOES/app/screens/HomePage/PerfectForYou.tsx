@@ -24,6 +24,8 @@ export default function PerfectForYou() {
         <ScrollView style={{ flex: 1, backgroundColor: '#121212' }}>
             <BackgroundGlow colors={['#5B60F6', '#BD7CBE', '#BBBE7C']}/>
 
+            <ThemedText>Our Picks For You</ThemedText>
+
         </ScrollView>
     );
 }

@@ -88,8 +88,9 @@ function ColorChangingText({ text, style }) {
 }
 
 // section component for section title + horizontal song list
-const Section = ({ title, data }) => {
+const Section = ({ title, data, route }) => {
     const listRef = useRef(null);
+    const router = useRouter();
 
     const handleNext = () => {
         if (listRef.current) {
@@ -101,49 +102,50 @@ const Section = ({ title, data }) => {
     };
 
     return (
-        <View style={styles.section}>
-        {/* Section Header with Arrow */}
-        <View style={styles.header}>
+      <View style={styles.section}>
+        <TouchableOpacity 
+          style={styles.header} 
+          onPress={() => router.push(route)}
+          activeOpacity={0.7}
+        >
           <ColorChangingText style={styles.headerTitle} text={title} />
-          <TouchableOpacity style={styles.arrowButton} onPress={handleNext}>
+          <View style={styles.arrowButton}>
             <Ionicons name="arrow-forward" size={20} color="white" />
-          </TouchableOpacity>
-        </View>
-  
+          </View>
+        </TouchableOpacity>
+    
         {/* Horizontal List */}
         <FlatList
-          ref={listRef}
-          data={data}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <TouchableOpacity style={styles.card}>
-              <Image source={item.image} style={styles.image} />
-              <ThemedText 
+        ref={listRef}
+        data={data}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <TouchableOpacity style={styles.card}>
+            <Image source={item.image} style={styles.image} />
+            <ThemedText 
               style={styles.songTitle}
               numberOfLines={1}
-              ellipsizeMode='tail'
-              >
-                {item.title}
-              </ThemedText>
-            </TouchableOpacity>
-          )}
-        />
-      </View>
+              ellipsizeMode="tail"
+            >
+              {item.title}
+            </ThemedText>
+          </TouchableOpacity>
+        )}
+      />
+    </View>
 );
 }
 
 export default function HomePage() {
-  
-  const router = useRouter();
 
     return (
         <View style={{ flex: 1, backgroundColor: '#121212' }}>
             <BackgroundGlow />
             <ScrollView style={styles.container}>
                 {/* Perfect For You */}
-                <Section title="Perfect for You" data={PerfectForYou}/> 
+                <Section title="Perfect for You" data={PerfectForYou} route='/screens/HomePage/PerfectForYou'/> 
 
                 {/* Try Something New */}
                 <Section title="Try Something New" data={TrySomethingNew} />
