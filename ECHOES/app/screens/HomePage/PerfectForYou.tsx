@@ -18,6 +18,7 @@ import { useThemeColor } from '@/hooks/useThemeColor';
 import { Ionicons } from '@expo/vector-icons';
 import Svg, { Defs, RadialGradient, Stop, Circle } from 'react-native-svg';
 import { BackgroundGlow } from '@/app/(tabs)/HomePage';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const filterOptions=[
     'Song',
@@ -41,10 +42,11 @@ export default function PerfectForYou() {
                 <ThemedText style={styles.headerTitle}>Our Picks For You</ThemedText>
 
                 {/* filter bar */}
-                <View style={[styles.filterBar, { flexDirection: 'row' }]}>
-                    <ThemedText>Sort by{' '}</ThemedText>
+                <View style={styles.filterBar}>
+                    <ThemedText style={styles.filterLabel}>Sort by</ThemedText>
                     <TouchableOpacity style={styles.filterButton}>
-                        <ThemedText style={[styles.filterBarText, { color: '#FF9EDF' }]}>{selectedFilter}</ThemedText>
+                        <ThemedText style={styles.filterButtonText}>{selectedFilter}</ThemedText>
+                        <MaterialIcons name="close" size={20} color="white" style={{ marginLeft: 6 }} /> 
                     </TouchableOpacity>
                 </View>
             </ScrollView>
@@ -61,31 +63,40 @@ const styles = StyleSheet.create({
         padding: 30,
       },
     filterBar: {
+        flexDirection: 'row',
+        alignItems: 'center', // ensures vertical alignment
+        justifyContent: 'space-between', // keeps "Sort by" on the left and button on the right
         width: '80%',
         height: 44,
         borderRadius: 20,
         backgroundColor: 'black',
-        opacity: 0.4,
+        opacity: 0.9,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.4,
         shadowRadius: 6,
         elevation: 8,
-        alignContent: 'center',
-        justifyContent: 'space-around',
         alignSelf: 'center',
-        flex: 1,
-    },
-    filterBarText: {
+        paddingHorizontal: 12,
+      },
+      filterLabel: {
         fontFamily: 'InterLight',
-        fontSize: 20,
-        padding: 10,
+        fontSize: 18,
         color: 'white',
-    },
-    filterButton: {
+      },
+      filterButton: {
         backgroundColor: '#5B60F6',
         borderRadius: 20,
-        padding: 10,
+        paddingHorizontal: 20,
+        paddingVertical: 6,
         flexDirection: 'row',
-    }
-});
+        alignItems: 'center',
+        width: '70%',
+        justifyContent: 'space-between',
+      },
+      filterButtonText: {
+        fontFamily: 'InterMedium',
+        fontSize: 16,
+        color: 'white',
+      },
+    });
