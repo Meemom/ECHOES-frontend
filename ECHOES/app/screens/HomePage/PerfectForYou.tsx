@@ -17,7 +17,7 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { Ionicons } from '@expo/vector-icons';
 import Svg, { Defs, RadialGradient, Stop, Circle } from 'react-native-svg';
-import { BackgroundGlow } from '@/app/(tabs)/HomePage';
+import { BackgroundGlow, Section} from '@/app/(tabs)/HomePage';
 import { MaterialIcons } from '@expo/vector-icons';
 
 const filterOptions=[
@@ -25,6 +25,12 @@ const filterOptions=[
     'Genre',
     'Release Date',
 ];
+
+const recommendedSongs = [
+    {id: '1', title: 'Other People', image: require('@/assets/images/CLAIRO-VIBES.png')},
+    {id: '2', title: 'PASSENGER', image: require('@/assets/images/Magdalena-Bay.png')},
+    {id: '3', title: 'Carolina', image: require('@/assets/images/GYM.png')},
+]
 
 export default function PerfectForYou() {
     const [selectedFilter, setSelectedFilter] = useState(filterOptions[0]);
@@ -42,13 +48,21 @@ export default function PerfectForYou() {
                 <ThemedText style={styles.headerTitle}>Our Picks For You</ThemedText>
 
                 {/* filter bar */}
-                <View style={styles.filterBar}>
+                <View style={[styles.filterBar, { alignSelf: 'flex-start' }]}>
                     <ThemedText style={styles.filterLabel}>Sort by</ThemedText>
                     <TouchableOpacity style={styles.filterButton}>
                         <ThemedText style={styles.filterButtonText}>{selectedFilter}</ThemedText>
                         <MaterialIcons name="close" size={20} color="white" style={{ marginLeft: 6 }} /> 
                     </TouchableOpacity>
                 </View>
+
+                <Section data={recommendedSongs} />
+
+                {/* songs based on moods */}
+                <ThemedText style={styles.headerTitle}>How are you feeling today?</ThemedText>
+                <TouchableOpacity style={[styles.filterBar, { height: 102 }]}>
+
+                </TouchableOpacity>
             </ScrollView>
         </View>
     );
@@ -78,6 +92,7 @@ const styles = StyleSheet.create({
         elevation: 8,
         alignSelf: 'center',
         paddingHorizontal: 12,
+        marginLeft: 20, 
       },
       filterLabel: {
         fontFamily: 'InterLight',
@@ -88,7 +103,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#5B60F6',
         borderRadius: 20,
         paddingHorizontal: 20,
-        paddingVertical: 6,
+        paddingVertical: 3,
         flexDirection: 'row',
         alignItems: 'center',
         width: '70%',

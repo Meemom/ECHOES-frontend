@@ -88,7 +88,7 @@ function ColorChangingText({ text, style }) {
 }
 
 // section component for section title + horizontal song list
-const Section = ({ title, data, route }) => {
+export const Section = ({ title, data, route }) => {
     const listRef = useRef(null);
     const router = useRouter();
 
