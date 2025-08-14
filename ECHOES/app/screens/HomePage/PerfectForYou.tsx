@@ -52,20 +52,19 @@ function EmotionsTab() {
       return (
         <View>
             {/* input to add new emotion */}
-            <View>
+            <View style={{ alignItems: 'center' }}>
                 <TextInput
-            style={styles.input}
-            placeholder="Type an emotion..."
-            value={input}
-            onChangeText={setInput}
-            onSubmitEditing={() => addEmotion(input.trim())}
-            />
-            <TouchableOpacity
-            style={styles.addButton}
-            onPress={() => addEmotion(input.trim())}
-            >
-                
-            </TouchableOpacity>
+                style={styles.input}
+                placeholder="Type an emotion..."
+                value={input}
+                onChangeText={setInput}
+                onSubmitEditing={() => addEmotion(input.trim())}
+                />
+                <TouchableOpacity
+                style={styles.addButton}
+                onPress={() => addEmotion(input.trim())}
+                >   
+                </TouchableOpacity>
             </View>
 
             {/* predefined emotions */}
@@ -84,7 +83,9 @@ function EmotionsTab() {
             data={emotions}
             keyExtractor={(item) => item}
             horizontal
-            contentContainerStyle={styles.chipList}
+            style={{ width: '100%' }}                 
+            contentContainerStyle={styles.selectedListContent}
+            showsHorizontalScrollIndicator={false}
             renderItem={({ item }) => (
             <View style={styles.chip}>
                 <ThemedText style={styles.chipText}>{item}</ThemedText>
@@ -93,7 +94,7 @@ function EmotionsTab() {
                 </TouchableOpacity>
             </View>
             )}
-            />
+        />
         </View>
       );
 }
@@ -126,7 +127,9 @@ export default function PerfectForYou() {
 
                 {/* songs based on moods */}
                 <ThemedText style={styles.headerTitle}>How are you feeling today?</ThemedText>
-                <EmotionsTab />
+                <View style={styles.emotionsTab}>
+                    <EmotionsTab />
+                </View>
             </ScrollView>
         </View>
     );
@@ -142,10 +145,9 @@ const styles = StyleSheet.create({
       },
     filterBar: {
         flexDirection: 'row',
-        alignItems: 'center', // ensures vertical alignment
-        justifyContent: 'space-between', // keeps "Sort by" on the left and button on the right
+        alignItems: 'center', 
+        justifyContent: 'space-between', //
         width: '80%',
-        height: 44,
         borderRadius: 20,
         backgroundColor: 'black',
         opacity: 0.9,
@@ -155,8 +157,9 @@ const styles = StyleSheet.create({
         shadowRadius: 6,
         elevation: 8,
         alignSelf: 'center',
-        paddingHorizontal: 12,
         marginLeft: 20, 
+        paddingHorizontal: 10,
+        paddingVertical: 10,
       },
       filterLabel: {
         fontFamily: 'InterLight',
@@ -178,17 +181,41 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: 'white',
       },
+      emotionsTab: {
+        width: '90%',
+        alignSelf: 'center',
+        flexDirection: 'column',    
+        alignItems: 'stretch',     
+        justifyContent: 'flex-start',
+        borderRadius: 20,
+        backgroundColor: 'black',
+        opacity: 0.9,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.4,
+        shadowRadius: 6,
+        elevation: 8,
+        paddingHorizontal: 10,
+        paddingVertical: 10,
+        overflow: 'hidden',
+      },
       inputRow: {
         flexDirection: 'row',
+        alignItems: 'center',
+        gap: 8,               
         marginBottom: 10,
       },
       input: {
         flex: 1,
         borderWidth: 1,
         borderColor: '#ccc',
-        borderRadius: 8,
+        borderRadius: 20,
         paddingHorizontal: 10,
+        paddingVertical: 10,
         backgroundColor: 'white',
+        width: '90%',
+        margin: 5,
+        alignSelf: 'center',
       },
       addButton: {
         marginLeft: 10,
@@ -204,7 +231,7 @@ const styles = StyleSheet.create({
       predefinedRow: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        marginBottom: 15,
+        marginBottom: 8,
       },
       predefinedButton: {
         backgroundColor: '#eee',
@@ -218,6 +245,9 @@ const styles = StyleSheet.create({
       },
       chipList: {
         paddingVertical: 10,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        maxWidth: '100%',
       },
       chip: {
         flexDirection: 'row',
