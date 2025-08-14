@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
       chip: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#ddd',
+        backgroundColor: '#5B60F6',
         paddingHorizontal: 12,
         paddingVertical: 6,
         borderRadius: 20,
@@ -261,9 +261,10 @@ const styles = StyleSheet.create({
       chipText: {
         fontSize: 14,
         marginRight: 6,
+        color: 'white'
       },
       removeText: {
-        color: '#ff4444',
+        color: 'white',
         fontWeight: 'bold',
       },
     });
