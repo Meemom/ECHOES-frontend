@@ -10,6 +10,7 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
   FlatList,
+  TextInput, 
 } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -31,6 +32,71 @@ const recommendedSongs = [
     {id: '2', title: 'PASSENGER', image: require('@/assets/images/Magdalena-Bay.png')},
     {id: '3', title: 'Carolina', image: require('@/assets/images/GYM.png')},
 ]
+
+// choosing songs based on emotion
+function EmotionsTab() {
+    const [emotions, setEmotions] = useState([]);
+    const [input, setInput] = useState('');
+
+    const addEmotion = (emotion) => {
+        if (emotions && !emotions.includes(emotion)) {
+            setEmotions([...emotions, emotion]);
+        }
+        setInput('');
+    };
+
+    const removeEmotion = (emotion) => {
+        setEmotions(emotions.filter((e) => e !== emotion));
+      };
+
+      return (
+        <View>
+            {/* input to add new emotion */}
+            <View>
+                <TextInput
+            style={styles.input}
+            placeholder="Type an emotion..."
+            value={input}
+            onChangeText={setInput}
+            onSubmitEditing={() => addEmotion(input.trim())}
+            />
+            <TouchableOpacity
+            style={styles.addButton}
+            onPress={() => addEmotion(input.trim())}
+            >
+                
+            </TouchableOpacity>
+            </View>
+
+            {/* predefined emotions */}
+            {['Happy', 'Sad', 'Excited', 'Tired'].map((emo) => (
+            <TouchableOpacity
+                key={emo}
+                style={styles.predefinedButton}
+                onPress={() => addEmotion(emo)}
+            >
+                <ThemedText style={styles.predefinedText}>{emo}</ThemedText>
+            </TouchableOpacity>
+            ))}
+
+            {/* selected emotions */}
+            <FlatList
+            data={emotions}
+            keyExtractor={(item) => item}
+            horizontal
+            contentContainerStyle={styles.chipList}
+            renderItem={({ item }) => (
+            <View style={styles.chip}>
+                <ThemedText style={styles.chipText}>{item}</ThemedText>
+                <TouchableOpacity onPress={() => removeEmotion(item)}>
+                <ThemedText style={styles.removeText}> ✕ </ThemedText>
+                </TouchableOpacity>
+            </View>
+            )}
+            />
+        </View>
+      );
+}
 
 export default function PerfectForYou() {
     const [selectedFilter, setSelectedFilter] = useState(filterOptions[0]);
@@ -60,9 +126,7 @@ export default function PerfectForYou() {
 
                 {/* songs based on moods */}
                 <ThemedText style={styles.headerTitle}>How are you feeling today?</ThemedText>
-                <TouchableOpacity style={[styles.filterBar, { height: 102 }]}>
-
-                </TouchableOpacity>
+                <EmotionsTab />
             </ScrollView>
         </View>
     );
@@ -113,5 +177,63 @@ const styles = StyleSheet.create({
         fontFamily: 'InterMedium',
         fontSize: 16,
         color: 'white',
+      },
+      inputRow: {
+        flexDirection: 'row',
+        marginBottom: 10,
+      },
+      input: {
+        flex: 1,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 8,
+        paddingHorizontal: 10,
+        backgroundColor: 'white',
+      },
+      addButton: {
+        marginLeft: 10,
+        backgroundColor: '#4CAF50',
+        paddingHorizontal: 15,
+        justifyContent: 'center',
+        borderRadius: 8,
+      },
+      addButtonText: {
+        color: 'white',
+        fontWeight: '600',
+      },
+      predefinedRow: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        marginBottom: 15,
+      },
+      predefinedButton: {
+        backgroundColor: '#eee',
+        paddingVertical: 6,
+        paddingHorizontal: 12,
+        borderRadius: 20,
+        margin: 4,
+      },
+      predefinedText: {
+        fontSize: 14,
+      },
+      chipList: {
+        paddingVertical: 10,
+      },
+      chip: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#ddd',
+        paddingHorizontal: 12,
+        paddingVertical: 6,
+        borderRadius: 20,
+        marginRight: 8,
+      },
+      chipText: {
+        fontSize: 14,
+        marginRight: 6,
+      },
+      removeText: {
+        color: '#ff4444',
+        fontWeight: 'bold',
       },
     });
