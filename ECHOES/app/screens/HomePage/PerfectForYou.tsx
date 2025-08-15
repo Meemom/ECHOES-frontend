@@ -257,6 +257,7 @@ const styles = StyleSheet.create({
         paddingVertical: 6,
         borderRadius: 20,
         marginRight: 8,
+        marginTop: 5, 
       },
       chipText: {
         fontSize: 14,
