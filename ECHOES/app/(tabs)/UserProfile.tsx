@@ -92,7 +92,10 @@ export default function UserProfile() {
                 </TouchableOpacity>
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 12, paddingHorizontal: 20}}>
-                <TouchableOpacity style={styles.dashboardTile}>
+                <TouchableOpacity 
+                style={styles.dashboardTile}
+                onPress={() => router.push('/screens/UserProfileScreens/UserGenres')}
+                >
                     <ThemedText style={styles.dashboardText}>{userInfo.genres} Genres</ThemedText>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.dashboardTile}>
