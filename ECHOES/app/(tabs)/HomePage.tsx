@@ -148,7 +148,7 @@ export default function HomePage() {
                 <Section title="Perfect for You" data={PerfectForYou} route='/screens/HomePage/PerfectForYou'/> 
 
                 {/* Try Something New */}
-                <Section title="Try Something New" data={TrySomethingNew} />
+                <Section title="Try Something New" data={TrySomethingNew} route='/screens/HomePage/TrySomethingNew'/>
 
                 {/* Recently Played */}
                 <Section title="Recently Played" data={RecentlyPlayed} />
