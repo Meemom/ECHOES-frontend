@@ -20,7 +20,7 @@ import { userConcerts } from '@/data/concertData';
 
 function genreCard() {
     return (
-        <View>
+        <View style={styles.genreCard}>
 
         </View>
     );
@@ -35,6 +35,11 @@ export default function UserGenres() {
                 Genres:</ThemedText>
             </View>
 
+            {/* sorting tab */}
+            <View style={styles.sortingTab}>
+                <ThemedText>Sort by</ThemedText>
+            </View>
+
         </ScrollView>
     );
 }
@@ -47,4 +52,21 @@ const styles = StyleSheet.create({
         color: 'white',
         lineHeight: 30,
       },
+    sortingTab: {
+        backgroundColor: 'white',
+        borderRadius: 20, 
+        width: '25%',
+        height: 27,
+        alignSelf: 'flex-start',
+        flexDirection: 'row',
+        alignContent: 'center',
+    },
+    genreCard: {
+        backgroundColor: '#5B60F6',
+        borderRadius: 30, 
+        width: 161,
+        height: 65,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 });
