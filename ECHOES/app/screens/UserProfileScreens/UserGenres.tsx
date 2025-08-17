@@ -18,10 +18,12 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { userInfo, popularPlaylists } from '@/data/userData';
 import { userConcerts } from '@/data/concertData';
 
-function genreCard() { 
+function genreCard() {
     return (
+        <View>
 
-    ); 
+        </View>
+    );
 }
 
 export default function UserGenres() {
