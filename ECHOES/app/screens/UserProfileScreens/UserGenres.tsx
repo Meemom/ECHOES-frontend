@@ -18,10 +18,16 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { userInfo, popularPlaylists } from '@/data/userData';
 import { userConcerts } from '@/data/concertData';
 
-function genreCard() {
+const genreData = [
+    {genre: 'Pop', artistsnum: 54, minutes: 480}
+];
+
+function genreCard({ data }) {
     return (
         <View style={styles.genreCard}>
-
+            <ThemedText>{data.genre}</ThemedText>
+            <ThemedText>{data.artistsnum}</ThemedText>
+            <ThemedText>{data.minutes}</ThemedText>
         </View>
     );
 }
@@ -35,9 +41,8 @@ export default function UserGenres() {
                 Genres:</ThemedText>
             </View>
 
-            {/* sorting tab */}
-            <View style={styles.sortingTab}>
-                <ThemedText>Sort by</ThemedText>
+            <View>
+                <genreCard data={genreData} />
             </View>
 
         </ScrollView>
