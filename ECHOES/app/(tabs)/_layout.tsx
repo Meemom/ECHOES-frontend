@@ -59,10 +59,10 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-      name="UserProfile"
+      name="SearchPage"
       options={{
-        title: 'Profile',
-        tabBarIcon: ({ color }) => <MaterialIcons name="account-circle" size={24} color={color} />,
+        title: 'Search',
+        tabBarIcon: ({ color }) => <MaterialIcons name="search" size={24} color={color} />,
         tabBarLabelStyle: { fontFamily: 'InterRegular' },
       }}
     />
@@ -71,6 +71,14 @@ export default function TabLayout() {
       options={{
         title: 'Review',
         tabBarIcon: ({ color }) => <MaterialIcons name="add" size={24} color={color} />,
+        tabBarLabelStyle: { fontFamily: 'InterRegular' },
+      }}
+    />
+      <Tabs.Screen
+      name="UserProfile"
+      options={{
+        title: 'Profile',
+        tabBarIcon: ({ color }) => <MaterialIcons name="account-circle" size={24} color={color} />,
         tabBarLabelStyle: { fontFamily: 'InterRegular' },
       }}
     />
