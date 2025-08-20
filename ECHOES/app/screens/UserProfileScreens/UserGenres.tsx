@@ -19,15 +19,19 @@ import { userInfo, popularPlaylists } from '@/data/userData';
 import { userConcerts } from '@/data/concertData';
 
 const genreData = [
-    {genre: 'Pop', artistsnum: 54, minutes: 480}
+    {genre: 'Pop', artistsnum: 54, minutes: 480},
+    {genre: 'R&B', artistsnum: 77, minutes: 690},
+    {genre: 'Indie Rock', artistsnum: 22, minutes: 120},
 ];
 
-function genreCard({ data }) {
+function GenreCard({ data }) {
     return (
         <View style={styles.genreCard}>
-            <ThemedText>{data.genre}</ThemedText>
-            <ThemedText>{data.artistsnum}</ThemedText>
-            <ThemedText>{data.minutes}</ThemedText>
+            <ThemedText style={styles.headerTitle}>{data.genre}</ThemedText>
+            <ThemedText style={[styles.headerTitle, { fontSize: 18 }]}>{data.artistsnum}</ThemedText>
+            <ThemedText style={[styles.headerTitle, { fontSize: 16 }]}>
+                minutes listened: {data.minutes}
+            </ThemedText>
         </View>
     );
 }
@@ -42,7 +46,7 @@ export default function UserGenres() {
             </View>
 
             <View>
-                <genreCard data={genreData} />
+                <GenreCard data={genreData} />
             </View>
 
         </ScrollView>
