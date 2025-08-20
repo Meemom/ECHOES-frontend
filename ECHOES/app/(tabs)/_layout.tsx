@@ -67,6 +67,14 @@ export default function TabLayout() {
       }}
     />
     <Tabs.Screen
+      name="WriteReview"
+      options={{
+        title: 'Review',
+        tabBarIcon: ({ color }) => <MaterialIcons name="add" size={24} color={color} />,
+        tabBarLabelStyle: { fontFamily: 'InterRegular' },
+      }}
+    />
+    <Tabs.Screen
       name="FriendsPage"
       options={{
         title: 'Friends',
