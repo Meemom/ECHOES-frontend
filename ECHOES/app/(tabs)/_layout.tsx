@@ -67,10 +67,10 @@ export default function TabLayout() {
       }}
     />
     <Tabs.Screen
-      name="UserReviews"
+      name="FriendsPage"
       options={{
-        title: 'Reviews',
-        tabBarIcon: ({ color }) => <MaterialIcons name="rate-review" size={24} color={color} />,
+        title: 'Friends',
+        tabBarIcon: ({ color }) => <MaterialIcons name="group" size={24} color={color} />,
         tabBarLabelStyle: { fontFamily: 'InterRegular' },
       }}
     />
