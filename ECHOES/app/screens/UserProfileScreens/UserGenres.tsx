@@ -27,9 +27,9 @@ const genreData = [
 function GenreCard({ data }) {
     return (
         <View style={styles.genreCard}>
-            <ThemedText style={styles.headerTitle}>{data.genre}</ThemedText>
-            <ThemedText style={[styles.headerTitle, { fontSize: 18 }]}>{data.artistsnum}</ThemedText>
-            <ThemedText style={[styles.headerTitle, { fontSize: 16 }]}>
+            <ThemedText style={[styles.headerTitle, { fontSize: 22, textAlign: 'center', flexWrap: 'wrap' }]}>{data.genre}</ThemedText>
+            <ThemedText style={[styles.headerTitle, { fontSize: 18, textAlign: 'center', flexWrap: 'wrap' }]}>{data.artistsnum} Artists</ThemedText>
+            <ThemedText style={[styles.headerTitle, { fontSize: 16, textAlign: 'center', flexWrap: 'wrap' }]}>
                 minutes listened: {data.minutes}
             </ThemedText>
         </View>
@@ -46,7 +46,9 @@ export default function UserGenres() {
             </View>
 
             <View>
-                <GenreCard data={genreData} />
+                {genreData.map((item, index) => (
+                    <GenreCard key={index} data={item} />
+                ))}
             </View>
 
         </ScrollView>
@@ -73,8 +75,10 @@ const styles = StyleSheet.create({
     genreCard: {
         backgroundColor: '#5B60F6',
         borderRadius: 30, 
-        width: 161,
-        height: 65,
+        paddingHorizontal: 15,
+        paddingVertical: 10, 
+        margin: 20, 
+        minWidth: 100, 
         justifyContent: 'center',
         alignItems: 'center',
     },
