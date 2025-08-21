@@ -10,7 +10,8 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
   FlatList,
-  TextInput
+  TextInput,
+  Touchable
 } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -34,14 +35,42 @@ export default function WriteReview() {
           placeholder="Search a song or playlist to review!"
           />
         </TouchableOpacity>
-    
 
+        <View style={styles.reviewBox}>
+          <TextInput 
+          style={styles.reviewInput}
+          placeholder="Write a review here..."
+          />
+        </View>
+
+        <View style={styles.reviewBox}>
+          <ThemedText style={styles.headerTitle}>Tags</ThemedText>
+          <View>
+            <TextInput 
+            style={styles.reviewInput}
+            placeholder="Tab to complete" />
+          </View>
+        </View>
+
+        <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity style={styles.reviewButton}>
+            <ThemedText>Cancel</ThemedText>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.reviewButton}>
+            <ThemedText>Post Review</ThemedText>
+          </TouchableOpacity>
+        </View>
+    
       </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  headerTitle: {
+    fontFamily: 'InterSemiBold',
+    color: 'white',
+  },
   reviewCard: {
     backgroundColor: '#1F1F1F',
     borderRadius: 20,
@@ -70,4 +99,31 @@ const styles = StyleSheet.create({
     margin: 5,
     alignSelf: 'center',
   },
+  reviewBox: {
+    flex: 1,
+    borderColor: '#3D4051',
+    borderRadius: 20, 
+    paddingHorizontal: 10, 
+    paddingVertical: 10, 
+    backgroundColor: '#1F1F1F',
+  },
+  reviewInput: {
+    flex: 1, 
+    color: 'white',
+    fontSize: 20,
+  },
+  reviewButton: {
+    position: 'absolute',
+    bottom: 50,
+    alignSelf: 'center',
+    backgroundColor: '#FF9EDF',
+    padding: 10,
+    borderRadius: 24,
+    zIndex: 9999,       
+    elevation: 12,      
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+  }
 });
