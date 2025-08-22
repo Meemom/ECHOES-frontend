@@ -49,7 +49,9 @@ export default function UserProfile() {
             {/* Profile header */}
             <View style={styles.section}>
                 <Image source={userInfo.profilePic} style={styles.profilePicture}/>
-                <TouchableOpacity style={styles.editButton}>
+                <TouchableOpacity 
+                style={styles.editButton}
+                onPress={() => router.push('/screens/UserProfileScreens/UserSettings')}>
                     <View style={{ alignSelf: 'center' }}>
                         <MaterialIcons name="edit" size={24} color='black' /> 
                     </View>
