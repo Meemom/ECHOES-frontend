@@ -27,8 +27,15 @@ const languageData = [
     {language: 'Mandarin', songs: 108},
 ];
 
-function LanguageCard({ data }) {
+// total songs
+const totalSongs = languageData.reduce((sum, item) => sum + item.songs, 0);
 
+function LanguageCard({ data }) {
+    return (
+        <View style={styles.languageBar}>
+            <ThemedText>{data.language}</ThemedText>
+        </View>
+    );
 }
 
 export default function UserLanguages() {
