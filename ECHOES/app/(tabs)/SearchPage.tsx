@@ -11,6 +11,7 @@ import {
   NativeScrollEvent,
   FlatList,
   TextInput, 
+  Pressable,
 } from 'react-native';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -35,8 +36,8 @@ function seededRandom(seed) {
 }
 
 function getDailyColors(numTiles) {
-    const today = new Date().toISOString().slice(0, 10); // e.g. "2025-08-19"
-    const seed = parseInt(today.replace(/-/g, "")); // use date as seed
+    const today = new Date().toISOString().slice(0, 10); 
+    const seed = parseInt(today.replace(/-/g, "")); 
     const colors = [];
 
     for (let i = 0; i < numTiles; i++) {
@@ -50,9 +51,19 @@ function getDailyColors(numTiles) {
 }
 
 function RandomColors() {
+    const colors = getDailyColors(6);
+    
     return (
-
-    );
+        <View style={styles.container}>
+          {colors.map((color, index) => (
+            <Pressable
+              key={index}
+              style={[styles.tile, { backgroundColor: color }]}
+              onPress={() => console.log(`Tile ${index + 1} pressed!`)}
+            />
+          ))}
+        </View>
+      );
 }
 
 export default function SearchPage() {
@@ -87,7 +98,18 @@ export default function SearchPage() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1 },
+    container: {
+        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        padding: 10,
+      },
+      tile: {
+        width: 100,
+        height: 100,
+        margin: 5,
+        borderRadius: 12,
+      },
     searchBar: {
         backgroundColor: 'white',
         borderRadius: 20,
