@@ -18,6 +18,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { userInfo, popularPlaylists } from '@/data/userData';
 import { userConcerts } from '@/data/concertData';
 
+// fake genre data
 const genreData = [
     {genre: 'Pop', artistsnum: 54, minutes: 480},
     {genre: 'R&B', artistsnum: 77, minutes: 690},

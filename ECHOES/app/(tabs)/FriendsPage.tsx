@@ -20,6 +20,7 @@ import Svg, { Defs, RadialGradient, Stop, Circle } from 'react-native-svg';
 import { useRouter } from 'expo-router';
 
 export default function FriendsPage() {
+    
 
 }
 

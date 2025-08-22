@@ -98,8 +98,10 @@ export default function UserProfile() {
                 >
                     <ThemedText style={styles.dashboardText}>{userInfo.genres} Genres</ThemedText>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.dashboardTile}>
-                    <ThemedText style={styles.dashboardText}>{userInfo.countries} Countries</ThemedText>
+                <TouchableOpacity 
+                style={styles.dashboardTile}
+                onPress={() => router.push('/screens/UserProfileScreens/UserLanguages')}>
+                    <ThemedText style={styles.dashboardText}>{userInfo.countries} Languages</ThemedText>
                 </TouchableOpacity>
             </View>
 
