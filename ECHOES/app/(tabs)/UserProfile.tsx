@@ -58,6 +58,11 @@ export default function UserProfile() {
                     <ThemedText style={styles.headerTitle}>@{userInfo.username}</ThemedText>
                 </View>
             </View>
+
+            {/* Profile Bio */}
+            <View>
+                <ThemedText style={styles.bioText}>{userInfo.bio}</ThemedText>
+            </View>
             
             {/* Following Info */}
             <View style={{ 
@@ -67,12 +72,8 @@ export default function UserProfile() {
                     width: '100%',
                     }}>
                 <View style={{ alignItems: 'center', flex: 1 }}>
-                    <ThemedText style={[styles.followText, { fontFamily: 'InterBold'}]}>{userInfo.followers}</ThemedText>
-                    <ThemedText style={[styles.followText, { fontFamily: 'InterRegular'}]}>Followers</ThemedText>
-                </View>
-                <View style={{ alignItems: 'center', flex: 1 }}>
-                    <ThemedText style={[styles.followText, { fontFamily: 'InterBold'}]}>{userInfo.following}</ThemedText>
-                    <ThemedText style={[styles.followText, { fontFamily: 'InterRegular'}]}>Following</ThemedText>
+                    <ThemedText style={[styles.followText, { fontFamily: 'InterBold'}]}>{userInfo.friends}</ThemedText>
+                    <ThemedText style={[styles.followText, { fontFamily: 'InterRegular'}]}>Friends</ThemedText>
                 </View>
             </View>
 
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
     container: { flex: 1, backgroundColor: '#101010'},
     section: {
         marginTop: 50,
-        marginBottom: 20,
+        marginBottom: 5,
     },
     header: {
         flexDirection: 'row',
@@ -167,6 +168,13 @@ const styles = StyleSheet.create({
     followText: {
         color: 'white',
         fontSize: 15, 
+    },
+    bioText: {
+        color: 'white',
+        fontSize: 16,
+        fontFamily: 'InterRegular',
+        alignSelf: 'center',
+        paddingBottom: 10,
     },
     dashboardTile: {
         backgroundColor: '#5B60F6',

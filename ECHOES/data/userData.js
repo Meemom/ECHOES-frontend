@@ -1,7 +1,8 @@
 export const userInfo = {
     username: 'The Sound of Meowsic',
-    followers: 409,
+    friends: 498,
     following: 364,
+    bio: 'just here for a purrfect time',
     profilePic: require('@/assets/images/catpic.jpg'),
     concerts: 13,
     reviews: 987,
