@@ -20,7 +20,7 @@ import Svg, { Defs, RadialGradient, Stop, Circle } from 'react-native-svg';
 
 // fake language data
 const languageData = [
-    {language: 'English', songs; 1003},
+    {language: 'English', songs: 1003},
     {language: 'Spanish', songs: 667},
     {language: 'Portugese', songs: 18},
     {language: 'Japanese', songs: 22},
@@ -31,9 +31,16 @@ const languageData = [
 const totalSongs = languageData.reduce((sum, item) => sum + item.songs, 0);
 
 function LanguageCard({ data }) {
+    const percentage = (data.songs / totalSongs) * 100;
+
     return (
-        <View style={styles.languageBar}>
-            <ThemedText>{data.language}</ThemedText>
+        <View style={styles.card}>
+            <ThemedText style={styles.label}>
+                {data.language} ({data.songs})
+            </ThemedText>
+            <View style={styles.barBackground}>
+                <View style={[styles.barFill, { width: `${percentage}%` }]} />
+            </View>
         </View>
     );
 }
@@ -59,9 +66,30 @@ const styles = StyleSheet.create({
         fontSize: 30,
         color: 'white',
         lineHeight: 30,
+        padding: 20, 
       },
-    languageBar: {
-        backgroundColor: 'white',
-        borderRadius: 20, 
-    }
+    card: {
+        marginBottom: 15,
+    },
+    label: {
+        marginBottom: 5,
+        fontFamily: 'interBold',
+        color: 'white',
+        fontSize: 18,
+        fontWeight: '600',
+        padding: 15, 
+    },
+    barBackground: {
+        height: 20,
+        backgroundColor: '#eee',
+        borderRadius: 10,
+        overflow: 'hidden',
+        width: '90%',
+        alignSelf: 'center',
+    },
+    barFill: {
+        height: '100%',
+        backgroundColor: '#5B60F6',
+        borderRadius: 10,
+    },
 });
