@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import {
   View,
   StyleSheet,
@@ -30,47 +30,42 @@ const NewReleases =[
     {id: 3, title: 'act right', image: require('@/assets/images/actright.jpeg')},
 ];
 
-function seededRandom(seed) {
-    let x = Math.sin(seed) * 10000;
-    return x - Math.floor(x);
-}
-
-function getDailyColors(numTiles) {
-    const today = new Date().toISOString().slice(0, 10); 
-    const seed = parseInt(today.replace(/-/g, "")); 
+function getDailyColors(numColors) {
+    const today = new Date().toDateString();
+    let seed = today.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
     const colors = [];
-
-    for (let i = 0; i < numTiles; i++) {
-        const r = Math.floor(seededRandom(seed + i) * 255);
-        const g = Math.floor(seededRandom(seed + i + 1) * 255);
-        const b = Math.floor(seededRandom(seed + i + 2) * 255);
-        colors.push(`rgb(${r},${g},${b})`);
+    for (let i = 0; i < numColors; i++) {
+      seed = (seed * 9301 + 49297) % 233280;
+      const rand = seed / 233280;
+      const color = `hsl(${Math.floor(rand * 360)}, 70%, 60%)`;
+      colors.push(color);
+    }
+    return colors;
   }
-
-  return colors;
-}
-
-function RandomColors() {
+  
+export default function RandomColors() {
     const colors = getDailyColors(6);
-    
+  
     return (
-        <View style={styles.container}>
-          {colors.map((color, index) => (
-            <Pressable
-              key={index}
-              style={[styles.tile, { backgroundColor: color }]}
-              onPress={() => console.log(`Tile ${index + 1} pressed!`)}
-            />
-          ))}
-        </View>
-      );
+      <View style={styles.container}>
+        {colors.map((color, index) => (
+          <TouchableOpacity
+            key={index}
+            style={[styles.tile, { backgroundColor: color }]}
+            onPress={() => {
+              console.log("Random song for tile", index + 1);
+            }}
+          />
+        ))}
+      </View>
+    );
 }
 
 export default function SearchPage() {
     return (
         <View style={{ flex: 1, backgroundColor: '#121212' }}>
             <BackgroundGlow colors={['#D062FF', '#44E7E7', 'white']}/>
-            <ScrollView style={styles.container}>
+            <ScrollView style={{ flex: 1 }}>
                 <View style={[styles.searchBar, { flexDirection: 'row' }]}>
                     <TouchableOpacity>
                         <MaterialIcons name="search" size={20} color="black" style={{ marginRight: 10 }}/>
@@ -101,14 +96,21 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
         flexWrap: "wrap",
-        justifyContent: "center",
-        padding: 10,
+        justifyContent: "space-between",
+        gap: 10, 
+        padding: 20,
       },
       tile: {
-        width: 100,
-        height: 100,
-        margin: 5,
+        width: "48%", 
+        height: 120,
         borderRadius: 12,
+        marginBottom: 5,
+        justifyContent: "center",
+        alignItems: "center",
+      },
+      text: {
+        color: "#fff",
+        fontWeight: "bold",
       },
     searchBar: {
         backgroundColor: 'white',
@@ -120,6 +122,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     headerTitle: {
+        marginTop: 15,
         fontFamily: 'InterBold',
         fontSize: 24, 
         color: 'white',
