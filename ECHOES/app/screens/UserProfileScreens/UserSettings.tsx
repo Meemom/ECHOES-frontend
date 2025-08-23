@@ -52,9 +52,6 @@ export default function UserSettings() {
                     </TouchableOpacity>
                 </View>
             </View>
-
-
-
         </ScrollView>
     );
 }
@@ -92,7 +89,5 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: 'white',
         padding: 10,
-    }
-
-
+    },
 });
